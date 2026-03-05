@@ -8,10 +8,22 @@ const router = express.Router();
 router.get('/', auth, async (req, res) => {
   try {
     const { search } = req.query;
-    let query = {
-      $or: [{ owner: req.user.id }, { collaborators: req.user.id }]
-    };
-    if (search) query.$text = { $search: search };
+
+    let query;
+
+    if (search && search.trim()) {
+      const regex = new RegExp(search.trim(), 'i');
+      query = {
+        $and: [
+          { $or: [{ owner: req.user.id }, { collaborators: req.user.id }] },
+          { $or: [{ title: regex }, { content: regex }] }
+        ]
+      };
+    } else {
+      query = {
+        $or: [{ owner: req.user.id }, { collaborators: req.user.id }]
+      };
+    }
 
     const notes = await Note.find(query)
       .populate('owner', 'username email')
