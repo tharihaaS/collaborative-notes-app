@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 
@@ -73,7 +73,7 @@ export default function NoteEditor() {
       {/* Navbar */}
       <nav className="bg-white shadow px-4 sm:px-6 py-4 sticky top-0 z-10">
         <div className="max-w-3xl mx-auto flex justify-between items-center flex-wrap gap-2">
-          <button onClick={() => navigate('/')} className="text-blue-600 hover:underline text-sm font-medium">
+          <button onClick={() => navigate('/dashboard')} className="text-blue-600 hover:underline text-sm font-medium">
             ← Back
           </button>
           <div className="flex items-center gap-2 flex-wrap">

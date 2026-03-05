@@ -4,7 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import NoteEditor from './pages/NoteEditor';
-import Landing from './pages/Landing';  // ← add this
+import Landing from './pages/Landing'; 
 
 function Protected({ children }) {
   const { user } = useAuth();
@@ -16,10 +16,10 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Landing />} />  {/* ← changed */}
+          <Route path="/" element={<Landing />} />  
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />  {/* ← changed */}
+          <Route path="/dashboard" element={<Protected><Dashboard /></Protected>} />  
           <Route path="/notes/:id" element={<Protected><NoteEditor /></Protected>} />
         </Routes>
       </BrowserRouter>
