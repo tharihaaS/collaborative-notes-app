@@ -8,6 +8,22 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
+
+    // Password rules (server-side check)
+    const passwordRules = [
+      password.length >= 8,
+      password.length <= 32,
+      /[A-Z]/.test(password),
+      /[a-z]/.test(password),
+      /[0-9]/.test(password),
+      /[^A-Za-z0-9]/.test(password),
+    ];
+    if (!passwordRules.every(Boolean)) {
+      return res.status(400).json({
+        message: 'Password must be 8–32 characters and include uppercase, lowercase, number, and special character'
+      });
+    }
+
     const existing = await User.findOne({ email });
     if (existing) return res.status(400).json({ message: 'Email already in use' });
 
