@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({ 
-  baseURL: 'https://collaborative-note-app-8qrq.vercel.app/'
+  baseURL: 'https://collaborative-note-app-8qrq.vercel.app/api'
 });
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
